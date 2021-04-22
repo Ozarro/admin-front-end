@@ -1,0 +1,19 @@
+.step-btn {
+  width: 50%;
+  background-color: white;
+  font-weight: bold;
+  border-radius: 0;
+}
+
+.step-btn-active {
+  border-bottom: solid 2px #1d4ed8;
+}
+
+.step-btn:focus {
+  box-shadow: unset;
+}
+
+body {
+  background: url("../img/auth.jpg") no-repeat center center fixed;
+  background-size: cover;
+}

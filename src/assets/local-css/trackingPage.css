@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Signika&display=swap");
+
+.custom-timeline {
+  margin-left: 20px;
+}
+
+.custom-timeline .rs-timeline-item-custom-dot .rs-icon {
+  position: absolute;
+  background: #fff;
+  top: 0;
+  left: -2px;
+  border: 2px solid #ddd;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 18px;
+  padding-top: 9px;
+  color: #999;
+  margin-left: -13px;
+}
+
+.custom-timeline .rs-timeline-item-content {
+  margin-left: 24px;
+}
+
+.tr-background {
+  background-color: white;
+  min-height: 100vh;
+  min-width: 100vw;
+  border: 1px solid white;
+  display: flex;
+  flex-direction: row;
+}
+
+.tracking-map {
+  flex: 0.4;
+  padding: 20px 100px;
+  background-color: #5b6467;
+  background-image: linear-gradient(315deg, #5b6467 0%, #8b939a 74%);
+}
+
+.tracking-img {
+  flex: 0.6;
+  background-image: url("/src/assets/img/tracking.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.map-item {
+  padding: 10px;
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 1px 0px 14px 0px rgba(48, 50, 50, 0.36);
+  font-family: "Signika", sans-serif;
+}
+
+.map-item-date {
+  color: black;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.map-item-state {
+  color: orange;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.map-item-description {
+  font-size: 15px;
+}
+
+.map-item-pending {
+  color: white;
+  font-size: 20px;
+  font-weight: bolder;
+  background-color: black;
+}
+
+.home-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+  .tracking-map {
+    flex: 1;
+    padding: 20px;
+  }
+  .map-item {
+    width: 90%;
+  }
+  .tracking-img {
+    flex: 0;
+    display: none;
+  }
+}
