@@ -8,15 +8,28 @@ const CreateSenderOrder = React.lazy(() =>
 const SenderOrderDetails = React.lazy(() =>
   import("./views/order/sender/viewOrderForm")
 );
-const SenderProfile = React.lazy(() =>
-  import("./views/accountSettings/senderProfile")
+/**
+ * Profile Components
+ * @type {React.LazyExoticComponent<React.ComponentType<any>>}
+ */
+const AdminProfile = React.lazy(() =>
+  import("./views/accountSettings/profile")
 );
-const SenderProfileEdit = React.lazy(() =>
-  import("./views/accountSettings/senderProfileEdit")
+const AdminProfileEdit = React.lazy(() =>
+  import("./views/accountSettings/profileEdit")
 );
 const ChangePassword = React.lazy(() =>
   import("./views/accountSettings/changePassword")
 );
+
+/**
+ * User Management Components
+ *
+ */
+const AdminTable = React.lazy(() =>
+    import("./views/user/admin/adminTable"));
+const AdminView = React.lazy(() =>
+    import("./views/user/admin/adminView"));
 
 const routes = [
   { path: "/admin/", exact: true, name: "Home" },
@@ -28,17 +41,27 @@ const routes = [
   {
     path: "/admin/profile/edit",
     name: "Edit",
-    component: SenderProfileEdit,
+    component: AdminProfileEdit,
   },
   {
     path: "/admin/profile",
     name: "Profile",
-    component: SenderProfile,
+    component: AdminProfile,
   },
   {
     path: "/admin/change-password",
     name: "Change Password",
     component: ChangePassword,
+  },
+  {
+    path: "/admin/view-admins",
+    name: "Admin Users",
+    component: AdminTable,
+  },
+  {
+    path: "/admin/view-admin/:userId",
+    name: "Admin User",
+    component: AdminView,
   },
 ];
 

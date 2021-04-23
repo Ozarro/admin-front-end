@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import { thunks } from "./store/index";
@@ -51,12 +51,9 @@ function App() {
             name="Home"
             render={(props) => <Layout {...props} />}
           />
-          {/* <Route
-            path="/"
-            name="Home Page"
-            render={(props) => <Landing {...props} />}
-          /> */}
+            <Redirect from="/" to="/admin" />
         </Switch>
+
       </React.Suspense>
       <ToastContainer
         position="top-right"

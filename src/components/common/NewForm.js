@@ -24,6 +24,7 @@ import { Component } from "react";
 class Form extends Component {
   state = {
     data: {},
+    image : "",
     errors: {},
     btnDisable: false,
     spinner: false,
@@ -35,6 +36,7 @@ class Form extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const error = this.validate();
+    console.log(error);
     if (!error) {
       this.callServer();
     } else {
@@ -110,6 +112,14 @@ class Form extends Component {
     this.setState({ data, errors, btnDisable });
   };
 
+  // On file select (from the pop up)
+  onFileChange = event => {
+    // Update the state
+    this.setState({ image: event.target.files[0] });
+
+  };
+
+
   validateProperty = (name, value) => {
     const schema = {
       [name]: this.schema[name],
@@ -149,6 +159,37 @@ class Form extends Component {
         />
         <CInvalidFeedback>{errors[name]}</CInvalidFeedback>
       </CFormGroup>
+    );
+  };
+
+  renderImageInput = (
+      name,
+      label,
+      type,
+      others = {},
+      notRequired = false,
+      hidden = false
+  ) => {
+    const { data, errors } = this.state;
+    return (
+        <CFormGroup hidden={hidden}>
+          <CLabel htmlFor={name}>
+            {label}{" "}
+            <span hidden={notRequired} style={{ color: "red" }}>
+            *
+          </span>
+          </CLabel>
+          <CInput
+              type={type}
+              id={name}
+              name={name}
+              onChange={this.onFileChange}
+              value={data[name]}
+              invalid={errors[name] ? true : false}
+              {...others}
+          />
+          <CInvalidFeedback>{errors[name]}</CInvalidFeedback>
+        </CFormGroup>
     );
   };
 

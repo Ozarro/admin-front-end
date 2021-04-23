@@ -19,7 +19,7 @@ class ChangePassword extends Form {
   state = {
     data: {
       currentPassword: "",
-      newPassword: "",
+      password: "",
       repeatNewPassword: "",
     },
     errors: {},
@@ -29,7 +29,7 @@ class ChangePassword extends Form {
 
   schema = {
     currentPassword: Joi.string().required().label("Current Password"),
-    newPassword: Joi.string().required().label("New Password"),
+    password: Joi.string().required().label("New Password"),
     repeatNewPassword: Joi.string()
       .custom(this.comparePassword())
       .required()
@@ -41,7 +41,7 @@ class ChangePassword extends Form {
 
   comparePassword() {
     return (value, helper) => {
-      if (value !== this.state.data.newPassword) {
+      if (value !== this.state.data.password) {
         return helper.error("any.invalid");
       }
       return value;
@@ -76,7 +76,7 @@ class ChangePassword extends Form {
                   <CRow>
                     <CCol>
                       {this.renderInput(
-                        "newPassword",
+                        "password",
                         "New Password",
                         "password",
                         {
@@ -119,7 +119,7 @@ class ChangePassword extends Form {
     const res = await this.props.changePassword(data);
     this.setState({ spinner: false });
     if (res.status === 200) {
-      this.props.history.push("/my/profile");
+      this.props.history.push("/admin/profile");
     } else {
       toast.error(res.message);
     }
@@ -129,7 +129,7 @@ class ChangePassword extends Form {
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
-  changePassword: (data) => dispatch(thunks.user.changePassword(data)),
+  changePassword: (data) => dispatch(thunks.user.changeAdminPassword(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChangePassword);

@@ -6,6 +6,7 @@ import axios from "axios";
 //const BASE_URL_HEROKU = "https://pickvick-api-dev.herokuapp.com/api";
 // const BASE_URL_HEROKU = "https://pick-vick-back-end.herokuapp.com/api";
 const BASE_URL_LOCAL = "http://localhost:8000/api";
+const AVATAR_URL = "http://localhost:8000/uploads/avatars";
 axios.defaults.baseURL = BASE_URL_LOCAL;
 
 /**
@@ -71,11 +72,7 @@ export default {
     },
 
     add: {
-      async user(data) {
-        return ajaxResolver(axios.post("/api/user/create/user", data));
-      },
       async admin(data) {
-        console.log(data);
         return ajaxResolver(axios.post("/user/register/admin", data));
       },
     },
@@ -86,46 +83,37 @@ export default {
       },
       async admins(query) {
         return ajaxResolver(
-          axios.get("/api/user/get-all/admin", { params: query })
+          axios.get("/user/get-all-admin", { params: query })
         );
       },
-      async getAdminProfile() {
-        return ajaxResolver(axios.get("/api/user/get-profile"));
+      async adminProfile() {
+        return ajaxResolver(axios.get("/user/get-profile"));
       }
     },
+
     put: {
       async changeStatus(userId, status) {
+        console.log(`/user/update-status/admin/${userId}`);
         return ajaxResolver(
-          axios.put(`/api/user/change-status/${userId}`, { status })
+          axios.put(`/user/update-status/admin/${userId}`, { status })
         );
       },
-      async changePassword(data) {
-        return ajaxResolver(axios.put(`/api/user/change-password`, data));
+      async changeAdminPassword(data) {
+        return ajaxResolver(axios.put(`/user/change-password/admin`, data));
       },
-      async updateSenderProfile(profileData) {
+      async updateAdminProfile(profileData) {
         return ajaxResolver(
-          axios.put(`/api/user/update-sender-profile`, profileData)
+          axios.put(`/user/update-profile/admin`, profileData)
         );
       },
       async updatePaymentMethod(paymentMethod) {
         return ajaxResolver(
           axios.put(`/api/user/update-payment-method`, paymentMethod)
         );
-      },
-      async updateBankDetails(bankData) {
-        return ajaxResolver(
-          axios.put(`/api/user/update-bank-details`, bankData)
-        );
-      },
+      }
     },
     remove: {
-      async bankDetails(accountNumber) {
-        return ajaxResolver(
-          axios.delete(
-            `/api/user/remove-bank-details/${accountNumber}?accountNumber=${accountNumber}`
-          )
-        );
-      },
+
     },
   },
   order: {

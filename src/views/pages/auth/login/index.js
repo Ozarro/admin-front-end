@@ -135,10 +135,12 @@ class Login extends Form {
   async callServer() {
     this.setState({ spinner: true });
 
+    // thunks.user.adminLogin is attached by mapDispatchtoProps
     const res = await this.props.adminLogin(
       this.state.data.email,
       this.state.data.password
     );
+    console.log(res);
 
     this.setState({ spinner: false });
 
@@ -158,6 +160,11 @@ class Login extends Form {
   }
 }
 
+/**
+ * Attach state and dispatch to props
+ * @param {*} state 
+ * @returns 
+ */
 const mapStateToProps = (state) => ({
   accessToken: getAccessToken(state),
   refreshToken: getRefreshToken(state),
@@ -165,8 +172,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  userLogin: (email, password) =>
+  adminLogin: (email, password) =>
     dispatch(thunks.user.adminLogin(email, password)),
 });
 
+/**
+ * Connect states and dispatch
+ */
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

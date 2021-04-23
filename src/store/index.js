@@ -22,13 +22,11 @@ import orderThunk from "./order/thunk";
 import uiReducer from "./ui";
 
 import userReducer, {
-  setBankData,
   setProfileData,
   setTokenData,
   setUserData,
-  unsetBankData,
-  updatePaymentMethod,
   updateProfileData,
+    setAdmins
 } from "./user";
 
 /**
@@ -61,7 +59,8 @@ export const actions = {
     setUserData,
     setTokenData,
     setProfileData,
-    updateProfileData
+    updateProfileData,
+    setAdmins
   },
   order: { setOrders, setInDetailOrder, setOrderCount, setOrderStatus },
   issue: { setIssues },

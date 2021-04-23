@@ -6,21 +6,17 @@ const initialState = {
     userId: "",
     name: "",
     mobile: "",
-    userType: ""
-  },
-  profileData: {
-    userId: "",
-    name: "",
-    mobile: "",
     userType: "",
     image : ""
+  },
+  profileData: {
   },
   tokens: {
     access: "",
     refresh: "",
   },
-  profileData: {},
   bankData: {},
+  admins : []
 };
 
 /**
@@ -44,8 +40,12 @@ const userSlice = createSlice({
     },
 
     updateProfileData(state, action) {
-      state.profileData.name = action.payload.name;
-      state.profileData.mobile = action.payload.mobile;
+      state.profileData = action.payload;
+      state.profileData.userType = action.payload.type;
+    },
+
+    setAdmins(state,action){
+      state.admins = action.payload;
     }
   },
 });
@@ -57,7 +57,8 @@ export const {
   setUserData,
   setTokenData,
   setProfileData,
-  updateProfileData
+  updateProfileData,
+  setAdmins
 } = userSlice.actions;
 
 export default userSlice.reducer;
