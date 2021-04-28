@@ -11,13 +11,14 @@ const _nav = [
   {
     _tag: "CSidebarNavTitle",
     _children: ["User Management"],
+    accountType: ["Admin"],
   },
   {
     _tag: "CSidebarNavItem",
     name: "View All Admins",
     to: "/admin/view-admins",
     icon: "cil-user",
-    // accountType: ["Admin"],
+    accountType: ["Admin"],
   },
   {
     _tag: "CSidebarNavTitle",
@@ -27,7 +28,8 @@ const _nav = [
     _tag: "CSidebarNavItem",
     name: "Add Product",
     to: "/admin/product/add-product",
-    icon: "cil-bookmark",
+    icon: "cib-product-hunt",
+
   },
   {
     _tag: "CSidebarNavItem",
@@ -38,14 +40,14 @@ const _nav = [
   {
     _tag: "CSidebarNavItem",
     name: "Add Category",
-    to: "/admin/product/add-category",
-    icon: "cil-bookmark",
+    to: "/admin/category/add-category",
+    icon: "cil-library-add",
   },
   {
     _tag: "CSidebarNavItem",
     name: "View Categories",
-    to: "/admin/product/view-categories",
-    icon: "cil-spreadsheet",
+    to: "/admin/category/view-categories",
+    icon: "cil-library",
   },
   {
     _tag: "CSidebarNavTitle",
@@ -55,13 +57,13 @@ const _nav = [
     _tag: "CSidebarNavItem",
     name: "Add Coupon",
     to: "/admin/coupon/add-coupon",
-    icon: "cil-bookmark",
+    icon: "cil-credit-card",
   },
   {
     _tag: "CSidebarNavItem",
     name: "View Coupons",
     to: "/admin/coupon/view-coupons",
-    icon: "cil-spreadsheet",
+    icon: "cil-money",
   },
   {
     _tag: "CSidebarNavTitle",
@@ -71,7 +73,7 @@ const _nav = [
     _tag: "CSidebarNavItem",
     name: "View Orders",
     to: "/admin/order/view-orders",
-    icon: "cil-spreadsheet",
+    icon: "cil-cart",
   },
 ];
 

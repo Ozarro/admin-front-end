@@ -26,7 +26,7 @@ const Content = () => {
                     exact={route.exact}
                     name={route.name}
                     isLoggedIn={route.isLoggedIn}
-                    accountType={route.accountType}
+                    userType={route.accountType}
                     render={(props) => (
                       <CFade>
                         <route.component {...props} />

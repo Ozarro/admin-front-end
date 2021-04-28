@@ -7,21 +7,26 @@ import {
   CImg,
 } from "@coreui/react";
 import React from "react";
-import {getImage} from "../store/user/select";
+import {getImage, getImageFromProfile} from "../store/user/select";
 import {useSelector} from "react-redux";
 
-const AVATAR_URL = "http://localhost:8000/uploads/avatars/";
+const AVATAR_URL = "http://localhost:8000/file/";
 
 const HeaderDropdown = () => {
-  const image_url = useSelector(getImage);
-
+  const image_url1 = useSelector(getImage);
+  const image_url2 = useSelector(getImageFromProfile);
+  let image_url;
+  if(image_url1) {
+    image_url = image_url1
+  }
+  image_url = image_url2;
 
   const handleLogout = () => {
-    if (localStorage.getItem("pv-access-token")) {
-      localStorage.removeItem("pv-access-token");
+    if (localStorage.getItem("ozarro-access-token")) {
+      localStorage.removeItem("ozarro-access-token");
     }
-    if (localStorage.getItem("pv-refresh-token")) {
-      localStorage.removeItem("pv-refresh-token");
+    if (localStorage.getItem("ozarro-refresh-token")) {
+      localStorage.removeItem("ozarro-refresh-token");
     }
     window.location = "/admin/auth/login";
   };
@@ -41,6 +46,7 @@ const HeaderDropdown = () => {
         <CDropdownItem header tag="div" color="light" className="text-center">
           <strong>Settings</strong>
         </CDropdownItem>
+
         <CDropdownItem to="/admin/profile">
           <CIcon name="cil-user" className="mfe-2" />
           Profile

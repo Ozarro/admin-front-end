@@ -15,17 +15,25 @@ import productReducer , {
   setProducts
 } from "./product";
 
+import orderReducer, {
+  setCoupons,
+    setOrders,
+    setOrderCounts,
+} from "./order";
+
 /**
  * Thunk Actions
  */
 import userThunk from "./user/thunk";
 import productThunk from "./product/thunk";
+import orderThunk from "./order/thunk";
 
 const store = configureStore({
   reducer: {
     ui: uiReducer,
     user: userReducer,
     product : productReducer,
+    order : orderReducer,
   },
 
   middleware: getDefaultMiddleware({
@@ -52,11 +60,18 @@ export const actions = {
     setCategories,
     setProducts
   },
+  order : {
+    setCoupons,
+    setOrders,
+    setOrderCounts
+  }
 };
 
 export const thunks = {
   user: userThunk,
   product : productThunk,
+  order : orderThunk
+
 };
 
 

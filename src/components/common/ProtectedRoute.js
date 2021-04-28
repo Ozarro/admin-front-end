@@ -2,15 +2,16 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Redirect, Route } from "react-router-dom";
 import { getUserId } from "../../store/user/select";
+import { getAccountType } from "../../store/user/select";
 
-const ProtectedRoute = ({ isLoggedIn, accountType, location, ...rest }) => {
+const ProtectedRoute = ({ isLoggedIn, userType, location, ...rest }) => {
   if (!isLoggedIn) {
     return <Route {...rest} />;
   }
 
   if (useSelector(getUserId) !== "") {
-    if (accountType) {
-      if (accountType.indexOf(useSelector(getAccountType)) !== -1) {
+    if (userType) {
+      if (userType.indexOf(useSelector(getAccountType)) !== -1) {
         return <Route {...rest} />;
       }
     } else {

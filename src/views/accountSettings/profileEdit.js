@@ -135,7 +135,6 @@ class ProfileEdit extends Form {
     formData.append(
         "image",
         this.state.image,
-        this.state.image.name
     );
     formData.append(
         "name",

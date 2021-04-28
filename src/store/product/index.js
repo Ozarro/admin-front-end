@@ -30,7 +30,7 @@ const productSlice = createSlice({
  * Exports
  */
 export const {
-  setCategories,
+    setCategories,
     setProducts
 } = productSlice.actions;
 

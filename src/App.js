@@ -5,6 +5,9 @@ import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 import { thunks } from "./store/index";
 
+let path = require('path');
+require('dotenv').config({path: path.join(__dirname,'../.env')});
+
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>
@@ -47,7 +50,7 @@ function App() {
             render={(props) => <Order {...props} />}
           /> */}
           <ProtectedRoute
-            isLoggedIn={false}
+            isLoggedIn={true}
             path="/admin"
             name="Home"
             render={(props) => <Layout {...props} />}

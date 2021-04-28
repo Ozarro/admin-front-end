@@ -45,7 +45,7 @@ const Header = () => {
       />
       <CHeaderBrand className="mx-auto d-lg-none" to="/">
         <img
-          src={"/img/PICKVICK LOGO.png"}
+          src={"/img/ozarro-logo.png"}
           alt={"ozarro logo"}
           style={{ width: "130px" }}
         />

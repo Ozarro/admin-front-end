@@ -31,12 +31,11 @@ class Form extends Component {
     currentStep: 1,
     stepAtr: [],
   };
-
   // ON submit call this function
   handleSubmit = (e) => {
     e.preventDefault();
     const error = this.validate();
-    console.log(error);
+    console.log("These are submit errors",error);
     if (!error) {
       this.callServer();
     } else {
@@ -131,6 +130,13 @@ class Form extends Component {
       : null;
   };
 
+  getCreateDate = (dateTime) => {
+    if (dateTime) {
+      const [date, val] = dateTime.split("T");
+      return date;
+    }
+  };
+
   renderInput = (
     name,
     label,
@@ -159,6 +165,37 @@ class Form extends Component {
         />
         <CInvalidFeedback>{errors[name]}</CInvalidFeedback>
       </CFormGroup>
+    );
+  };
+
+  renderDateInput = (
+      name,
+      label,
+      type,
+      others = {},
+      notRequired = false,
+      hidden = false
+  ) => {
+    const { data, errors } = this.state;
+    return (
+        <CFormGroup hidden={hidden}>
+          <CLabel htmlFor={name}>
+            {label}{" "}
+            <span hidden={notRequired} style={{ color: "red" }}>
+            *
+          </span>
+          </CLabel>
+          <CInput
+              type={type}
+              id={name}
+              name={name}
+              onChange={this.handleChange}
+              value={this.getCreateDate(data[name])}
+              invalid={errors[name] ? true : false}
+              {...others}
+          />
+          <CInvalidFeedback>{errors[name]}</CInvalidFeedback>
+        </CFormGroup>
     );
   };
 

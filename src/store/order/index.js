@@ -2,50 +2,31 @@ import { /*createAsyncThunk,*/ createSlice } from "@reduxjs/toolkit";
 //import api from "../../api"
 
 const initialState = {
-  userData: {
-    userId: "",
-    name: "",
-    mobile: "",
-    userType: "",
-    image : ""
-  },
-  profileData: {
-  },
-  tokens: {
-    access: "",
-    refresh: "",
-  },
-  bankData: {},
-  admins : []
+  orders : [],
+  coupons : [],
+  orderCounts : []
 };
 
 /**
- * User Slice
+ * Product Slice
  */
-const userSlice = createSlice({
-  name: "user",
+const orderSlice = createSlice({
+  name: "order",
   initialState,
 
   reducers: {
-    setUserData(state, action) {
-      state.userData = action.payload;
+    setOrders(state, action) {
+      state.orders = action.payload;
     },
 
-    setTokenData(state, action) {
-      state.tokens = action.payload;
+    setCoupons(state, action) {
+      state.coupons = action.payload;
     },
 
-    setProfileData(state, action) {
-      state.profileData = action.payload;
-    },
-
-    updateProfileData(state, action) {
-      state.profileData = action.payload;
-    },
-
-    setAdmins(state,action){
-      state.admins = action.payload;
+    setOrderCounts(state, action){
+      state.orderCounts = action.payload
     }
+
   },
 });
 
@@ -53,11 +34,9 @@ const userSlice = createSlice({
  * Exports
  */
 export const {
-  setUserData,
-  setTokenData,
-  setProfileData,
-  updateProfileData,
-  setAdmins
-} = userSlice.actions;
+  setOrders,
+  setCoupons,
+    setOrderCounts
+} = orderSlice.actions;
 
-export default userSlice.reducer;
+export default orderSlice.reducer;

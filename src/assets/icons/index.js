@@ -132,6 +132,11 @@ import {
   cilWarning,
   cilX,
   cilXCircle,
+  cibProductHunt,
+    cilLibrary,
+    cilLibraryAdd,
+    cilCart,
+    cilAirplaneModeOff
 } from "@coreui/icons";
 import { logo } from "./logo";
 import { logoNegative } from "./logo-negative";
@@ -249,6 +254,11 @@ export const icons = Object.assign(
     cilWarning,
     cilMobile,
     cilAt,
+    cilLibrary,
+    cilLibraryAdd,
+    cilCart,
+    cibProductHunt,
+    cilAirplaneModeOff
   },
   {
     cifUs,
@@ -282,5 +292,6 @@ export const icons = Object.assign(
     cibPaypal,
     cibGooglePay,
     cibCcAmex,
+
   }
 );

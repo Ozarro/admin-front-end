@@ -20,7 +20,7 @@ import { thunks } from "../../store/index";
 import {getAllCategories} from "../../store/product/select";
 import CIcon from "@coreui/icons-react";
 
-class ProfileEdit extends Form {
+class ProductAdd extends Form {
   state = {
     data: {
       pCode : "",
@@ -234,4 +234,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileEdit);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductAdd);

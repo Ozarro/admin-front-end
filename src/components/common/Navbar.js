@@ -28,8 +28,8 @@ export default function Navbar(props) {
               to="/"
             >
               <img
-                src={"/img/PICKVICK LOGO.png"}
-                alt={"pick-vick logo"}
+                src={"/img/ozarro-logo.png"}
+                alt={"ozarro logo"}
                 className="h-16"
               />
             </Link>

@@ -84,12 +84,9 @@ class ProductView extends Form {
 
         const product = this.getProductBypCode(this.props.match.params.pCode);
         if (product) {
-            this.setState({userId : this.props.match.params.userId})
-            console.log(product);
             const updateData = cleanQuery(product,
                 ["status", "categoryId", "pName","color", "size", "price", "stock", "description"]);
             const pCode= product.pCode;
-            console.log(updateData);
             this.setState({data : {...updateData}, pCode});
         }
     }
@@ -232,8 +229,10 @@ class ProductView extends Form {
         console.log("state", this.state);
         console.log("formData",formData);
 
+        console.log("Props", this.props);
 
         const res = await this.props.updateProduct(this.state.pCode, formData);
+        console.log("PRoduct reposnes", res);
         this.setState({ spinner: false });
         if (res.status === 200) {
             this.props.history.push("/admin/product/view-products");

@@ -10,9 +10,15 @@ export const getImage = createDraftSafeSelector(
     (user) => user.userData.image
 );
 
+export const getImageFromProfile = createDraftSafeSelector(
+    (state) => state.user,
+    (user) => user.profileData.image
+);
+
+
 export const getAccountType = createDraftSafeSelector(
   (state) => state.user,
-  (user) => user.userData.type
+  (user) => user.userData.userType
 );
 
 export const getAccessToken = createDraftSafeSelector(

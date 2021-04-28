@@ -5,8 +5,9 @@ import axios from "axios";
  */
 // const BASE_URL_HEROKU = "https://ozarro-back-end.herokuapp.com/api";
 // const BASE_URL_HEROKU = process.env.BASE_URL_HEROKU;
+// const BASE_URL_LOCAL = process.env.BASE_URL_LOCAL;
 const BASE_URL_LOCAL = "http://localhost:8000/api";
-const AVATAR_URL = "http://localhost:8000/uploads/avatars";
+
 axios.defaults.baseURL = BASE_URL_LOCAL;
 
 /**
@@ -24,6 +25,7 @@ export const registerAccessToken = (token) => {
  * @param res
  */
 function readStatus(res) {
+  console.log("read status res", res);
   if (!res || !res.status) {
     return {
       status: 408,
@@ -44,12 +46,12 @@ function readStatus(res) {
 async function ajaxResolver(axiosRes, options = null) {
   try {
     const res = await axiosRes;
-    console.log("this is reponse", res);
+    console.log("Ajax Resolver Response", res);
     if (options && options.fullBody) return [readStatus(res), res.data];
     else return [readStatus(res), res.data.data];
   } catch (e) {
     const res = e.response;
-    console.log("this is error", e);
+    console.log("Ajax error", e);
     return [readStatus(res), null];
   }
 }
@@ -111,7 +113,7 @@ export default {
   product: {
     add: {
       async product(productData) {
-        return ajaxResolver(axios.post(`/product/add-product`, productData, formDataConfig));
+        return ajaxResolver(axios.post(`/product/add-product`, productData, formDataConfig))
       },
     },
     get: {
@@ -121,6 +123,7 @@ export default {
     },
     put : {
       async updateProduct(pCode,data) {
+        console.log("Product put");
         return ajaxResolver(axios.put(`/product/update-product/${pCode}`, data, formDataConfig))
       }
     }
@@ -139,6 +142,7 @@ export default {
     },
     put : {
       async updateCategory(categoryId,data) {
+        console.log("This is response",categoryId, data);
         return ajaxResolver(axios.put(`/product/update-category/${categoryId}`, data))
       }
     }
@@ -167,6 +171,9 @@ export default {
     get: {
       async allOrders(query) {
         return ajaxResolver(axios.get(`/order/get-orders`, { params: query }));
+      },
+      async orderCounts(query) {
+        return ajaxResolver(axios.get(`/order/get-order-counts`, { params: query }));
       },
     },
     put : {
