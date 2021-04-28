@@ -145,9 +145,7 @@ class ProfileEdit extends Form {
         "mobile",
         this.state.data.mobile
     )
-    const profileData = { ...this.state.data , image: this.state.image};
-    console.log("ProfileData", profileData);
-    delete profileData.userType;
+
     const res1 = await this.props.updateProfileDetails(formData);
     // const res2 = await this.props.updatePaymentMethod(
     //   this.state.data.paymentMethod

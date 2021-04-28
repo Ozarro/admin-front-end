@@ -41,7 +41,6 @@ const userSlice = createSlice({
 
     updateProfileData(state, action) {
       state.profileData = action.payload;
-      state.profileData.userType = action.payload.type;
     },
 
     setAdmins(state,action){

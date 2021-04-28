@@ -40,6 +40,7 @@ function App() {
             name="Auth Page"
             render={(props) => <Auth {...props} />}
           />
+
           {/* <Route
             path="/order"
             name="Order Page"

@@ -3,8 +3,8 @@ import axios from "axios";
 /**
  * Setup Axios
  */
-//const BASE_URL_HEROKU = "https://pickvick-api-dev.herokuapp.com/api";
-// const BASE_URL_HEROKU = "https://pick-vick-back-end.herokuapp.com/api";
+// const BASE_URL_HEROKU = "https://ozarro-back-end.herokuapp.com/api";
+// const BASE_URL_HEROKU = process.env.BASE_URL_HEROKU;
 const BASE_URL_LOCAL = "http://localhost:8000/api";
 const AVATAR_URL = "http://localhost:8000/uploads/avatars";
 axios.defaults.baseURL = BASE_URL_LOCAL;
@@ -54,15 +54,16 @@ async function ajaxResolver(axiosRes, options = null) {
   }
 }
 
+/**
+ * Form data config
+ */
+const formDataConfig = {
+  headers: { 'content-type': 'multipart/form-data' }
+}
+
 export default {
   user: {
     login: {
-      async user(username, password) {
-        return ajaxResolver(
-          axios.post("/user/login", { username, password }),
-          { fullBody: true }
-        );
-      },
       async admin(email, password) {
         return ajaxResolver(
           axios.post("/user/login/admin", { email, password }),
@@ -78,9 +79,6 @@ export default {
     },
 
     get: {
-      async users(query) {
-        return ajaxResolver(axios.get("/api/user/get-all", { params: query }));
-      },
       async admins(query) {
         return ajaxResolver(
           axios.get("/user/get-all-admin", { params: query })
@@ -93,7 +91,6 @@ export default {
 
     put: {
       async changeStatus(userId, status) {
-        console.log(`/user/update-status/admin/${userId}`);
         return ajaxResolver(
           axios.put(`/user/update-status/admin/${userId}`, { status })
         );
@@ -103,12 +100,7 @@ export default {
       },
       async updateAdminProfile(profileData) {
         return ajaxResolver(
-          axios.put(`/user/update-profile/admin`, profileData)
-        );
-      },
-      async updatePaymentMethod(paymentMethod) {
-        return ajaxResolver(
-          axios.put(`/api/user/update-payment-method`, paymentMethod)
+          axios.put(`/user/update-profile/admin`, profileData,formDataConfig)
         );
       }
     },
@@ -116,69 +108,73 @@ export default {
 
     },
   },
+  product: {
+    add: {
+      async product(productData) {
+        return ajaxResolver(axios.post(`/product/add-product`, productData, formDataConfig));
+      },
+    },
+    get: {
+      async allProducts(query) {
+        return ajaxResolver(axios.get(`/product/get-all-products`, { params: query }));
+      },
+    },
+    put : {
+      async updateProduct(pCode,data) {
+        return ajaxResolver(axios.put(`/product/update-product/${pCode}`, data, formDataConfig))
+      }
+    }
+  },
+
+  category: {
+    add: {
+      async category(categoryData) {
+        return ajaxResolver(axios.post(`/product/add-category`, categoryData));
+      },
+    },
+    get: {
+      async allCategories(query) {
+        return ajaxResolver(axios.get(`/product/get-categories`, { params: query }));
+      },
+    },
+    put : {
+      async updateCategory(categoryId,data) {
+        return ajaxResolver(axios.put(`/product/update-category/${categoryId}`, data))
+      }
+    }
+  },
+  coupon: {
+    add: {
+      async coupon(couponData) {
+        return ajaxResolver(axios.post(`/order/generate-coupon`, couponData));
+      },
+    },
+    get: {
+      async allCoupons(query) {
+        return ajaxResolver(axios.get(`/order/get-coupons`, { params: query }));
+      },
+      async couponByCode(couponCode){
+        return ajaxResolver(axios.get(`/order/get-coupon/${couponCode}`))
+      }
+    },
+    put : {
+      async updateCoupon(couponCode,data) {
+        return ajaxResolver(axios.put(`/order/update-coupon/${couponCode}`, data))
+      }
+    }
+  },
   order: {
-    create: {
-      async sender(data) {
-        return ajaxResolver(axios.post(`/api/order/place-order`, data));
-      },
-      async guest(data) {
-        return ajaxResolver(axios.post(`/api/order/guest-place-order`, data));
-      },
-    },
     get: {
-      async personal(query) {
-        return ajaxResolver(axios.get(`/api/order/get-my-all`, query));
-      },
-      async all(query) {
-        return ajaxResolver(axios.get(`/api/order/get-all`, query));
-      },
-      async orderInfo(orderId) {
-        return ajaxResolver(axios.get(`/api/order/get-order/${orderId}`));
-      },
-      async trackOrder(trackingId) {
-        return ajaxResolver(axios.get(`/api/order/track-order/${trackingId}`));
-      },
-      async count() {
-        return ajaxResolver(axios.get(`/api/order/get-sender-orderCounts`));
+      async allOrders(query) {
+        return ajaxResolver(axios.get(`/order/get-orders`, { params: query }));
       },
     },
+    put : {
+      async updateOrder(orderId,data) {
+        return ajaxResolver(axios.put(`/order/update-order/${orderId}`, data))
+      }
+    }
   },
-  finance: {
-    get: {
-      async personal(query) {
-        return ajaxResolver(axios.get(`/api/finance/get-my-full`, query));
-      },
-      async amount() {
-        return ajaxResolver(axios.get(`/api/finance/get-sender-myCounts`));
-      },
-      async creditDetails() {
-        return ajaxResolver(axios.get(`/api/user/get-credits`));
-      },
-      async payments() {
-        return ajaxResolver(axios.get(`/api/finance/get-my-all`));
-      },
-    },
-  },
-  issue: {
-    get: {
-      async senderIssues() {
-        return ajaxResolver(axios.get(`/api/issue/get-my-all`));
-      },
-    },
-    post: {
-      async createIssue(data) {
-        return ajaxResolver(axios.post(`/api/issue/create`, data));
-      },
-    },
-  },
-  metaData: {
-    get: {
-      async paymentStatus() {
-        return ajaxResolver(axios.get(`/api/meta/get-PaymentStatus`));
-      },
-      async orderStatus() {
-        return ajaxResolver(axios.get(`/api/meta/get-OrderStatus`));
-      },
-    },
-  },
+
+
 };

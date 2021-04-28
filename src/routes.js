@@ -1,13 +1,8 @@
 import React from "react";
 
-const Dashboard = React.lazy(() => import("./views/dashboard"));
-const CreateSenderOrder = React.lazy(() =>
-  import("./views/order/sender/createOrderForm")
-);
+// const Dashboard = React.lazy(() => import("./views/dashboard"));
 
-const SenderOrderDetails = React.lazy(() =>
-  import("./views/order/sender/viewOrderForm")
-);
+
 /**
  * Profile Components
  * @type {React.LazyExoticComponent<React.ComponentType<any>>}
@@ -23,6 +18,16 @@ const ChangePassword = React.lazy(() =>
 );
 
 /**
+ * Product Management Component
+ */
+const CreateProduct = React.lazy(() =>
+    import("./views/product/addProduct"));
+const ProductTable = React.lazy(() =>
+    import("./views/product/productTable"));
+const ProductView = React.lazy(() =>
+    import("./views/product/productView"));
+
+/**
  * User Management Components
  *
  */
@@ -31,13 +36,15 @@ const AdminTable = React.lazy(() =>
 const AdminView = React.lazy(() =>
     import("./views/user/admin/adminView"));
 
+
+
 const routes = [
   { path: "/admin/", exact: true, name: "Home" },
-  {
-    path: "/admin/dashboard",
-    name: "Dashboard",
-    component: Dashboard,
-  },
+  // {
+  //   path: "/admin/dashboard",
+  //   name: "Dashboard",
+  //   component: Dashboard,
+  // },
   {
     path: "/admin/profile/edit",
     name: "Edit",
@@ -62,6 +69,21 @@ const routes = [
     path: "/admin/view-admin/:userId",
     name: "Admin User",
     component: AdminView,
+  },
+  {
+    path: "/admin/product/add-product",
+    name: "Product",
+    component: CreateProduct,
+  },
+  {
+    path: "/admin/product/view-products",
+    name: "Product",
+    component: ProductTable,
+  },
+  {
+    path: "/admin/product/update-product/:pCode",
+    name: "Product",
+    component: ProductView,
   },
 ];
 

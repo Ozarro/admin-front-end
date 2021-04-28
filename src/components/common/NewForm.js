@@ -306,6 +306,7 @@ class Form extends Component {
           </option>
           {options
             ? options.map((option, index) => {
+
                 return (
                   <option key={index} value={option}>
                     {displayNames[index] ? displayNames[index] : option}
@@ -316,6 +317,51 @@ class Form extends Component {
         </CSelect>
         <CInvalidFeedback>{errors[name]}</CInvalidFeedback>
       </CFormGroup>
+    );
+  };
+
+  renderSelectWithLabelValue = (
+      name,
+      label,
+      options,
+      others = {},
+      displayNames = [],
+      notRequired = false,
+      hidden = false
+  ) => {
+    const { data, errors } = this.state;
+    return (
+        <CFormGroup hidden={hidden}>
+          <CLabel htmlFor={name}>
+            {label}{" "}
+            <span hidden={notRequired} style={{ color: "red" }}>
+            *
+          </span>
+          </CLabel>
+          <CSelect
+              custom
+              name={name}
+              id={name}
+              value={data[name]}
+              onChange={this.handleChange}
+              invalid={errors[name] ? true : false}
+              {...others}
+          >
+
+            <option value="" disabled hidden>
+              Choose here..
+            </option>
+            {options.map((item, index) => {
+                  return (
+                      <option key={index} value={item.value}>
+                        {item.label ? item.label : item}
+                      </option>
+                  );
+                })
+                }
+          </CSelect>
+          <CInvalidFeedback>{errors[name]}</CInvalidFeedback>
+        </CFormGroup>
     );
   };
 

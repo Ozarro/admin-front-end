@@ -1,24 +1,5 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 
-import financeReducer, {
-  setAmount,
-  setPayments,
-  setPaymentStatus,
-  setCredit,
-} from "./finance";
-import financeThunk from "./finance/thunk";
-
-import issueReducer, { setIssues } from "./issue";
-import issueThunk from "./issue/thunk";
-
-import orderReducer, {
-  setInDetailOrder,
-  setOrderCount,
-  setOrders,
-  setOrderStatus,
-} from "./order";
-import orderThunk from "./order/thunk";
-
 import uiReducer from "./ui";
 
 import userReducer, {
@@ -29,19 +10,24 @@ import userReducer, {
     setAdmins
 } from "./user";
 
+import productReducer , {
+  setCategories,
+  setProducts
+} from "./product";
+
 /**
  * Thunk Actions
  */
 import userThunk from "./user/thunk";
+import productThunk from "./product/thunk";
 
 const store = configureStore({
   reducer: {
     ui: uiReducer,
     user: userReducer,
-    order: orderReducer,
-    issue: issueReducer,
-    finance: financeReducer,
+    product : productReducer,
   },
+
   middleware: getDefaultMiddleware({
     thunk: true,
     immutableCheck: true,
@@ -62,14 +48,34 @@ export const actions = {
     updateProfileData,
     setAdmins
   },
-  order: { setOrders, setInDetailOrder, setOrderCount, setOrderStatus },
-  issue: { setIssues },
-  finance: { setAmount, setPaymentStatus, setPayments, setCredit },
+  product : {
+    setCategories,
+    setProducts
+  },
 };
 
 export const thunks = {
   user: userThunk,
-  order: orderThunk,
-  issue: issueThunk,
-  finance: financeThunk,
+  product : productThunk,
 };
+
+
+/**
+ * Helper Function
+ */
+export function cleanQuery(query , fields = null) {
+  const qClone = {...query}
+  Object.keys(qClone).forEach(
+      (k) => {
+        if (fields === null || fields.includes(k) ) {
+          (qClone[k] === null || qClone[k] === undefined) && delete qClone[k]
+        } else {
+          delete qClone[k]
+        }
+
+      }
+  )
+
+  return qClone
+}
+

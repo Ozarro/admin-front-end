@@ -1,31 +1,51 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { /*createAsyncThunk,*/ createSlice } from "@reduxjs/toolkit";
+//import api from "../../api"
 
 const initialState = {
-  orders: [],
-  inDetailOrder: {},
-  count: [],
-  status: [],
+  userData: {
+    userId: "",
+    name: "",
+    mobile: "",
+    userType: "",
+    image : ""
+  },
+  profileData: {
+  },
+  tokens: {
+    access: "",
+    refresh: "",
+  },
+  bankData: {},
+  admins : []
 };
 
 /**
- * Order Slice
+ * User Slice
  */
-const orderSlice = createSlice({
-  name: "order",
+const userSlice = createSlice({
+  name: "user",
   initialState,
+
   reducers: {
-    setOrders(state, action) {
-      state.orders = action.payload;
+    setUserData(state, action) {
+      state.userData = action.payload;
     },
-    setInDetailOrder(state, action) {
-      state.inDetailOrder = action.payload;
+
+    setTokenData(state, action) {
+      state.tokens = action.payload;
     },
-    setOrderCount(state, action) {
-      state.count = action.payload;
+
+    setProfileData(state, action) {
+      state.profileData = action.payload;
     },
-    setOrderStatus(state, action) {
-      state.status = action.payload;
+
+    updateProfileData(state, action) {
+      state.profileData = action.payload;
     },
+
+    setAdmins(state,action){
+      state.admins = action.payload;
+    }
   },
 });
 
@@ -33,9 +53,11 @@ const orderSlice = createSlice({
  * Exports
  */
 export const {
-  setOrders,
-  setInDetailOrder,
-  setOrderCount,
-  setOrderStatus,
-} = orderSlice.actions;
-export default orderSlice.reducer;
+  setUserData,
+  setTokenData,
+  setProfileData,
+  updateProfileData,
+  setAdmins
+} = userSlice.actions;
+
+export default userSlice.reducer;
