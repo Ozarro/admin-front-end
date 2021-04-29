@@ -48,8 +48,6 @@ class ProductView extends Form {
         return product;
     };
 
-
-
     schema = {
         status: Joi.string().optional().label("Product Status"),
         pName: Joi.string().optional().label("Product Name"),
