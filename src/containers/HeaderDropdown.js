@@ -9,8 +9,9 @@ import {
 import React from "react";
 import {getImage, getImageFromProfile} from "../store/user/select";
 import {useSelector} from "react-redux";
+import {BACK_END_URL} from "../api/index";
 
-const AVATAR_URL = "http://localhost:8000/file/";
+const AVATAR_URL = BACK_END_URL.DEFAULT_FILE_URL;
 
 const HeaderDropdown = () => {
   const image_url1 = useSelector(getImage);

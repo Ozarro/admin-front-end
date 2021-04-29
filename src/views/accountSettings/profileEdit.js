@@ -100,22 +100,6 @@ class ProfileEdit extends Form {
                     })}
                   </CCol>
                 </CRow>
-                {/*<CRow>*/}
-                {/*  <CFormGroup className="mb-3">*/}
-                {/*    <CInputGroup>*/}
-                {/*      <CInputGroupPrepend>*/}
-                {/*        <CInputGroupText>*/}
-                {/*          <CIcon name="cli-avatar" />*/}
-                {/*        </CInputGroupText>*/}
-                {/*      </CInputGroupPrepend>*/}
-                {/*      <CInput*/}
-                {/*          type="file"*/}
-                {/*          id="image"*/}
-                {/*          name="image"*/}
-                {/*      />*/}
-                {/*    </CInputGroup>*/}
-                {/*  </CFormGroup>*/}
-                {/*</CRow>*/}
                 <CRow>
                   <CCol>{this.renderButton("Save", "success", "danger")}</CCol>
                 </CRow>
@@ -146,17 +130,12 @@ class ProfileEdit extends Form {
     )
 
     const res1 = await this.props.updateProfileDetails(formData);
-    // const res2 = await this.props.updatePaymentMethod(
-    //   this.state.data.paymentMethod
-    // );
     this.setState({ spinner: false });
-    // if (res1.status === 200 && res2.status === 200) {
     if (res1.status === 200) {
       toast.success(res1.message)
       this.props.history.push("/admin/profile");
     } else {
       if (res1.status !== 200) toast.error(res1.message);
-      // if (res2.status !== 200) toast.error(res2.message);
     }
   }
 }
@@ -169,8 +148,6 @@ const mapDispatchToProps = (dispatch) => ({
   getProfileDetails: () => dispatch(thunks.user.getProfileDetails()),
   updateProfileDetails: (profileData) =>
     dispatch(thunks.user.updateAdminProfile(profileData)),
-  // updatePaymentMethod: (paymentMethod) =>
-  //   dispatch(thunks.user.updatePaymentMethod(paymentMethod)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileEdit);
