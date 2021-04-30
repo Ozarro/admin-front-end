@@ -125,4 +125,26 @@ export default class orderThunk {
       return res;
     }
   }
+
+  /**
+   * ------------------Remove------------------------------
+   */
+
+  /**
+   * Remove coupon
+   */
+  static removeCoupon(couponId) {
+    return async (dispatch, getState) => {
+      registerAccessToken(getState().user.tokens.access);
+      const [res, data] = await api.coupon.remove.removeCoupon(couponId);
+      if (res.status === 200) {
+        const [res1, data] = await api.coupon.get.allCoupons();
+        if (res1.status === 200) {
+          dispatch(setCoupons(data));
+        }
+      }
+      return res;
+    }
+  }
+
 }

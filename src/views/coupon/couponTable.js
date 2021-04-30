@@ -32,6 +32,16 @@ const CouponTable = (props) => {
         return () => toast.dismiss();
     }, []);
 
+    const handeRemoveCoupon = async (couponId) => {
+        setLoading(true);
+        const res = await dispatch(thunks.order.removeCoupon(couponId));
+        if (res.status !== 200) {
+            toast.error(res.message);
+        }
+        toast.success("Coupon removed Successfully");
+        setLoading(false);
+    }
+
     const fields = [
         { key: "couponCode", label: "Coupon Code", _style: { width: "30%" } },
         { key: "amount", label: "Amount", _style: { width: "30%" } },
@@ -40,6 +50,13 @@ const CouponTable = (props) => {
         { key: "status",label: "Status", _style: { width: "10%" } },
         {
             key: "show_details",
+            label: "",
+            _style: { width: "1%" },
+            sorter: false,
+            filter: false,
+        },
+        {
+            key: "remove_item",
             label: "",
             _style: { width: "1%" },
             sorter: false,
@@ -94,7 +111,24 @@ const CouponTable = (props) => {
                                                     props.history.push(`/admin/coupon/update-coupon/${item.couponId}`);
                                                 }}
                                             >
-                                                Show
+                                                Edit
+                                            </CButton>
+                                        </td>
+                                    );
+                                },
+                                remove_item: (item) => {
+                                    return (
+                                        <td className="py-2">
+                                            <CButton
+                                                color="danger"
+                                                // variant="outline"
+                                                shape="rounded-pill"
+                                                size="sm"
+                                                onClick={() => {
+                                                    handeRemoveCoupon(item.couponId);
+                                                }}
+                                            >
+                                                Remove
                                             </CButton>
                                         </td>
                                     );

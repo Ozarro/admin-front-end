@@ -115,4 +115,43 @@ export default class productThunk {
       return res;
     }
   }
+
+  /**
+   * ------------------Remove------------------------------
+   */
+  /**
+   * Remove Product
+   */
+  static removeProduct(pCode) {
+    return async (dispatch, getState) => {
+      registerAccessToken(getState().user.tokens.access);
+      const [res, data1] = await api.product.remove.removeProduct(pCode);
+      if (res.status === 200) {
+        const [res1, data] = await api.product.get.allProducts();
+        if (res1.status === 200) {
+          dispatch(setProducts(data));
+        }
+      }
+      return res;
+    }
+  }
+
+  /**
+   * Remove Category
+   */
+  static removeCategory(categoryId) {
+    return async (dispatch, getState) => {
+      registerAccessToken(getState().user.tokens.access);
+      const [res] = await api.category.remove.removeCategory(categoryId);
+      if (res.status === 200) {
+        const [res1, data] = await api.category.get.allCategories();
+        if (res1.status === 200) {
+          dispatch(setCategories(data));
+        }
+      }
+      return res;
+    }
+  }
+
+
 }

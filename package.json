@@ -44,14 +44,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "build:tailwind": "tailwind build src/assets/styles/index.css -o src/assets/styles/tailwind.css"
+    "eject": "react-scripts eject"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.5",
     "postcss": "^8.2.7",
-    "react-scripts": "^4.0.1",
-    "tailwindcss": "^2.0.3"
+    "react-scripts": "^4.0.1"
   },
   "browserslist": {
     "production": [

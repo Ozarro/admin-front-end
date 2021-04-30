@@ -32,6 +32,16 @@ const ProductTable = (props) => {
         return () => toast.dismiss();
     }, []);
 
+    const handleRemoveProduct = async (pCode) => {
+        setLoading(true);
+        const res = await dispatch(thunks.product.removeProduct(pCode));
+        if (res.status !== 200) {
+            toast.error(res.message);
+        }
+        toast.success("Product removed Successfully");
+        setLoading(false);
+    }
+
     const fields = [
         { key: "pCode", label: "Product Code", _style: { width: "30%" } },
         { key: "pName", label: "Product Name", _style: { width: "10%" } },
@@ -43,6 +53,13 @@ const ProductTable = (props) => {
         { key: "status",label: "Status", _style: { width: "10%" } },
         {
             key: "show_details",
+            label: "",
+            _style: { width: "1%" },
+            sorter: false,
+            filter: false,
+        },
+        {
+            key: "remove_item",
             label: "",
             _style: { width: "1%" },
             sorter: false,
@@ -98,7 +115,24 @@ const ProductTable = (props) => {
                                                     props.history.push(`/admin/product/update-product/${item.pCode}`);
                                                 }}
                                             >
-                                                Show
+                                                Edit
+                                            </CButton>
+                                        </td>
+                                    );
+                                },
+                                remove_item: (item) => {
+                                    return (
+                                        <td className="py-2">
+                                            <CButton
+                                                color="danger"
+                                                // variant="outline"
+                                                shape="rounded-pill"
+                                                size="sm"
+                                                onClick={() => {
+                                                    handleRemoveProduct(item.pCode);
+                                                }}
+                                            >
+                                                Remove
                                             </CButton>
                                         </td>
                                     );

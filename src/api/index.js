@@ -120,6 +120,7 @@ export default {
 
     },
   },
+
   product: {
     add: {
       async product(productData) {
@@ -132,11 +133,15 @@ export default {
       },
     },
     put : {
-      async updateProduct(pCode,data) {
-        console.log("Product put");
+      async updateProduct(pCode, data) {
         return ajaxResolver(axios.put(`/product/update-product/${pCode}`, data, formDataConfig))
       }
-    }
+    },
+    remove : {
+      async removeProduct(pCode) {
+        return ajaxResolver(axios.delete(`/product/remove-product/${pCode}`))
+      }
+      },
   },
 
   category: {
@@ -152,8 +157,12 @@ export default {
     },
     put : {
       async updateCategory(categoryId,data) {
-        console.log("This is response",categoryId, data);
         return ajaxResolver(axios.put(`/product/update-category/${categoryId}`, data))
+      }
+    },
+    remove : {
+      async removeCategory(categoryId) {
+        return ajaxResolver(axios.delete(`/product/remove-category/${categoryId}`))
       }
     }
   },
@@ -175,7 +184,12 @@ export default {
       async updateCoupon(couponCode,data) {
         return ajaxResolver(axios.put(`/order/update-coupon/${couponCode}`, data))
       }
-    }
+    },
+    remove : {
+      async removeCoupon(couponCode) {
+        return ajaxResolver(axios.delete(`/order/remove-coupon/${couponCode}`))
+      }
+    },
   },
   order: {
     get: {
@@ -192,6 +206,4 @@ export default {
       }
     }
   },
-
-
 };

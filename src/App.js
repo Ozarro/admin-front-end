@@ -6,7 +6,7 @@ import ProtectedRoute from "./components/common/ProtectedRoute";
 import { thunks } from "./store/index";
 
 let path = require('path');
-require('dotenv').config({path: path.join(__dirname,'../.env')});
+// require('dotenv').config({path: path.join(__dirname,'../.env')});
 
 const loading = (
   <div className="pt-3 text-center">

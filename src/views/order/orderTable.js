@@ -97,7 +97,7 @@ const OrderTable = (props) => {
                                                     props.history.push(`/admin/order/update-order/${item.orderId}`);
                                                 }}
                                             >
-                                                Show
+                                                Edit
                                             </CButton>
                                         </td>
                                     );

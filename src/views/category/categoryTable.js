@@ -32,12 +32,29 @@ const CategoryTable = (props) => {
         return () => toast.dismiss();
     }, []);
 
+    const handleRemoveCategory = async (categoryId) => {
+        setLoading(true);
+        const res = await dispatch(thunks.product.removeCategory(categoryId));
+        if (res.status !== 200) {
+            toast.error(res.message);
+        }
+        toast.success("Category removed Successfully");
+        setLoading(false);
+    }
+
     const fields = [
         { key: "name", label: "Category Name", _style: { width: "30%" } },
         { key: "description", label: "description", _style: { width: "50%" } },
         { key: "status",label: "Status", _style: { width: "10%" } },
         {
             key: "show_details",
+            label: "",
+            _style: { width: "1%" },
+            sorter: false,
+            filter: false,
+        },
+        {
+            key: "remove_item",
             label: "",
             _style: { width: "1%" },
             sorter: false,
@@ -93,7 +110,24 @@ const CategoryTable = (props) => {
                                                     props.history.push(`/admin/category/update-category/${item.categoryId}`);
                                                 }}
                                             >
-                                                Show
+                                                Edit
+                                            </CButton>
+                                        </td>
+                                    );
+                                },
+                                remove_item: (item) => {
+                                    return (
+                                        <td className="py-2">
+                                            <CButton
+                                                color="danger"
+                                                // variant="outline"
+                                                shape="rounded-pill"
+                                                size="sm"
+                                                onClick={() => {
+                                                    handleRemoveCategory(item.categoryId);
+                                                }}
+                                            >
+                                                Remove
                                             </CButton>
                                         </td>
                                     );

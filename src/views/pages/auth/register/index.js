@@ -152,7 +152,8 @@ class Register extends Form {
     this.setState({ spinner: false });
 
     if (res.status === 200) {
-      this.props.history.location = "/admin/auth/login";
+      toast.success("Registration successful, admin will verify your account soon.");
+        this.props.history.push("/admin/auth/login")
     } else {
       toast.error(res.message);
     }
