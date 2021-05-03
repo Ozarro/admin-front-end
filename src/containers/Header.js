@@ -11,11 +11,14 @@ import { useDispatch, useSelector } from "react-redux";
 // routes config
 import routes from "../routes";
 import { getSidebarShow, setSidebarShow } from "../store/ui";
+import { getUserData } from "../store/user/select";
 import { HeaderDropdown } from "./index";
 
 const Header = () => {
   const dispatch = useDispatch();
   const sidebarShow = useSelector(getSidebarShow);
+
+  const userData = useSelector(getUserData);
 
   const toggleSidebar = () => {
     const val = [true, "responsive"].includes(sidebarShow)
@@ -52,6 +55,10 @@ const Header = () => {
       </CHeaderBrand>
 
       <CHeaderNav className="d-md-down-none mr-auto"></CHeaderNav>
+
+        {/*<CHeaderNav className="px-3">*/}
+        {/*    Hy {(userData) ? userData.name : ''}*/}
+        {/*</CHeaderNav>*/}
 
       <CHeaderNav className="px-3">
         <HeaderDropdown />

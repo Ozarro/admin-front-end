@@ -36,6 +36,11 @@ export const getProfileData = createDraftSafeSelector(
   (user) => user.profileData
 );
 
+export const getUserData = createDraftSafeSelector(
+    (state) => state.user,
+    (user) => user.userData
+);
+
 export const getAllAdmins = createDraftSafeSelector(
     (state) => state.user,
     (user) => user.admins

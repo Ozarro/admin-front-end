@@ -7,7 +7,7 @@ import {
   CImg,
 } from "@coreui/react";
 import React from "react";
-import {getImage, getImageFromProfile} from "../store/user/select";
+import {getImage, getImageFromProfile, getUserData} from "../store/user/select";
 import {useSelector} from "react-redux";
 import {BACK_END_URL} from "../api/index";
 
@@ -16,6 +16,7 @@ const AVATAR_URL = BACK_END_URL.DEFAULT_FILE_URL;
 const HeaderDropdown = () => {
   const image_url1 = useSelector(getImage);
   const image_url2 = useSelector(getImageFromProfile);
+  const userData = useSelector(getUserData);
   let image_url;
   if(image_url1) {
     image_url = image_url1
@@ -35,17 +36,30 @@ const HeaderDropdown = () => {
   return (
     <CDropdown inNav className="c-header-nav-items mx-2" direction="down">
       <CDropdownToggle className="c-header-nav-link" caret={false}>
-        <div className="c-avatar">
+        <div className="c-avatar-xl">
           <CImg
             src={AVATAR_URL+image_url}
-            className="c-avatar-img"
+            className="c-avatar-xl"
             alt="admin@bootstrapmaster.com"
           />
+        </div>
+        <div className="ml-2 h7">
+          Hy {(userData) ? userData.name : ""}
         </div>
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
         <CDropdownItem header tag="div" color="light" className="text-center">
           <strong>Settings</strong>
+        </CDropdownItem>
+
+        <CDropdownItem>
+          <div className="c-avatar-xl">
+            <CImg
+                src={AVATAR_URL+image_url}
+                className="c-avatar-xl"
+                alt="admin@bootstrapmaster.com"
+            />
+          </div>
         </CDropdownItem>
 
         <CDropdownItem to="/admin/profile">

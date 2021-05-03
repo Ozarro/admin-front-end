@@ -2,7 +2,7 @@ import {
   CButton,
   CCol,
   CContainer,
-  CFormGroup,
+  CFormGroup, CImg,
   CInput,
   CLabel,
   CRow,
@@ -13,6 +13,9 @@ import { toast } from "react-toastify";
 import CardContainer from "../../components/common/CardContainer";
 import { thunks } from "../../store";
 import { getProfileData } from "../../store/user/select";
+import {BACK_END_URL} from "../../api/index";
+
+const AVATAR_URL = BACK_END_URL.DEFAULT_FILE_URL;
 
 const Profile = (props) => {
   const dispatch = useDispatch();
@@ -39,6 +42,17 @@ const Profile = (props) => {
       <CRow>
         <CCol>
           <CardContainer error={error} loading={loading} header="My Profile">
+            <CRow>
+              <CCol xs="12" md="6">
+                <div className="c-avatar-xl mb-4">
+                  <CImg
+                      src={AVATAR_URL+data.image}
+                      className="c-avatar-xl"
+                      alt="admin@bootstrapmaster.com"
+                  />
+                </div>
+              </CCol>
+            </CRow>
             <CRow>
               <CCol xs="12" md="6">
                 <CFormGroup>
