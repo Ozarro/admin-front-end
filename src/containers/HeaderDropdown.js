@@ -44,7 +44,7 @@ const HeaderDropdown = () => {
           />
         </div>
         <div className="ml-2 h7">
-          Hy {(userData) ? userData.name : ""}
+          Hey {(userData) ? userData.name : ""}
         </div>
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
