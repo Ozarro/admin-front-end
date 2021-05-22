@@ -38,7 +38,7 @@ class CategoryAdd extends Form {
 
   schema = {
     amountType: Joi.string().label("Amount Type"),
-    expiryDate: Joi.date().label("Expiry Date"),
+    expiryDate: Joi.date().iso().min(new Date()).label("Expiry Date"),
     amount: Joi.number().label("Amount"),
   };
 
@@ -102,13 +102,14 @@ class CategoryAdd extends Form {
     this.setState({ spinner: false });
 
     if (res.status === 200) {
-      if(res.data.data){
-        toast.success(res.data.data.couponCode);
+      console.log("Coupon data",res.data);
+      if(res.data){
+        toast.success(`Couopon Code : ${res.data.couponCode}`);
       }else{
         toast.success(res.message);
       }
 
-      this.props.history.push("/admin/product/view-categories");
+      // this.props.history.push("/admin/product/view-categories");
     } else {
       if (res.status !== 200) toast.error(res.message);
     }

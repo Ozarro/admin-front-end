@@ -18,10 +18,12 @@ const HeaderDropdown = () => {
   const image_url2 = useSelector(getImageFromProfile);
   const userData = useSelector(getUserData);
   let image_url;
-  if(image_url1) {
-    image_url = image_url1
+  if(image_url1 != undefined) {
+    image_url = image_url1;
+  }else{
+    image_url = image_url2;
   }
-  image_url = image_url2;
+
 
   const handleLogout = () => {
     if (localStorage.getItem("ozarro-access-token")) {
@@ -57,7 +59,7 @@ const HeaderDropdown = () => {
             <CImg
                 src={AVATAR_URL+image_url}
                 className="c-avatar-xl"
-                alt="admin@bootstrapmaster.com"
+                alt="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
             />
           </div>
         </CDropdownItem>
